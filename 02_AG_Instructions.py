@@ -1,3 +1,6 @@
+# Functions go here
+
+
 def yes_no(question):
     valid = False
     while not valid:
@@ -28,3 +31,5 @@ played_before = yes_no("Have you played the game before? ")
 print()
 if played_before == "no":
     instructions()
+
+print("Program continues")

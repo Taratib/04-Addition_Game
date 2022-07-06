@@ -1,3 +1,5 @@
+import random
+
 # Functions go here
 
 
@@ -23,6 +25,7 @@ def instructions():
     print("**** Welcome to the Addition Quiz ****")
     print()
     print("This is where the rules go.")
+    print()
 
     return ""
 
@@ -49,12 +52,35 @@ def num_check(question, low, high):
             print(error)
 
 
+def check_rounds():
+    while True:
+        print()
+        response = input("How many rounds: ")
+
+        round_error = "Please type either <enter> or an integer that is more than 0"
+
+        if response != "":
+            try:
+                response = int(response)
+
+                if response < 1:
+                    print(round_error)
+                    continue
+
+            except ValueError:
+                print(round_error)
+                continue
+
+        return response
+
+
 # Main routine does here
-how_much = num_check("What is the answer?  ", 0, 50)
-
-print("program continues")
-
 played_before = yes_no("Have you played the game before? ")
 print()
 if played_before == "no":
     instructions()
+
+
+
+
+
