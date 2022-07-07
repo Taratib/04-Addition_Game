@@ -54,18 +54,24 @@ def num_check(question, low, high):
 
 def check_rounds():
     while True:
-        print()
-        response = input("How many rounds: ")
+        response = input("How many question: ")
 
-        round_error = "Please type either <enter> or an integer that is more than 0"
+        round_error = "Please type either <enter> or an integer that is more than 0\n"
 
+        # If infinite mode not chosen, check response
+        # is an integer that is more than 0
         if response != "":
             try:
                 response = int(response)
 
+                # If response is too low, go back to
+                # stsrt of loop
                 if response < 1:
                     print(round_error)
                     continue
+
+            # if response is not an integer go back to
+            # start of loop
 
             except ValueError:
                 print(round_error)
@@ -80,7 +86,56 @@ print()
 if played_before == "no":
     instructions()
 
+rounds_played = 0
 
+# Ask user for # of rounds, <enter> for infinite mode
+rounds = check_rounds()
 
+end_game = "no"
+while end_game == "no":
 
+    # Start of the Game Play Loop
 
+    # Rounds Heading
+    print()
+    if rounds == "":
+        heading = "Continuous Mode: Question {}".format(rounds_played + 1)
+
+    else:
+        heading = "Question {} of {}".format(rounds_played + 1, rounds)
+
+    print(heading)
+
+    num_1 = random.randint(1, 50)
+    num_2 = random.randint(1, 50)
+
+    print()
+    print("What is {} + {} = ? ".format(num_1, num_2))
+
+    total = num_1 + num_2
+
+    # User input
+    users_answer = "Your answer: "
+    print()
+
+    choose = input("{} ".format (users_answer))
+
+    # End game if exit code is typed
+    if choose == "xxx":
+        break
+
+    # Check users answer
+
+    if users_answer == total:
+        print("Well done you got it right")
+    else:
+        print("Sorry you got it wrong. The correct answer was {}".format(total))
+
+    rounds_played += 1
+
+    # end game if requested # of rounds has been played
+    if rounds_played == rounds:
+        break
+
+# Put end game content here
+print("Thank you for playing")

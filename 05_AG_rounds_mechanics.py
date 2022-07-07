@@ -1,6 +1,4 @@
-# Main routine more efficent than v2
-
-# Checks for the a number that is more then zero
+import random
 
 
 def check_rounds():
@@ -28,7 +26,8 @@ def check_rounds():
 # Main routine goes here
 
 rounds_played = 0
-choose_instruction = "Answer: "
+choose_instruction = "What's the answer: "
+
 
 # Ask user for # of rounds, <enter> for infinite mode
 rounds = check_rounds()
@@ -41,12 +40,20 @@ while end_game == "no":
     # Rounds Heading
     print()
     if rounds == "":
-        heading = "Continuous Mode: Round {}".format(rounds_played + 1)
+        heading = "Continuous Mode: Question {}".format(rounds_played + 1)
 
     else:
-        heading = "Round {} of {}".format(rounds_played + 1, rounds)
+        heading = "Question {} of {}".format(rounds_played + 1, rounds)
 
     print(heading)
+    num_1 = random.randint(1, 50)
+    num_2 = random.randint(1, 50)
+
+    print()
+    print("What is {} + {} = ? ".format(num_1, num_2))
+
+    total = num_1 + num_2
+
     choose = input("{} ".format(choose_instruction))
 
     # End game if exit code is typed
