@@ -80,13 +80,59 @@ def check_rounds():
         return response
 
 
+def int_check(question, low=None, high=None, exit_code=None):
+    while True:
+
+        # sets up error messages
+        if low is not None and high is not None:
+            error = "Please enter an integer between {} and {} (inclusive)".format(low, high)
+        elif low is not None and high is None:
+            error = "Please enter an integer that is more than or equal to {}".format(low)
+        elif low is None and high is not None:
+            error = "Please enter an integer that is less than or equal to {}".format(high)
+        else:
+            error = "Please enter an integer"
+
+        try:
+            response = input(question)
+
+            # check to see if response is the exit code and return it
+            if response == exit_code:
+                return response
+
+            # change the response into an integer
+            else:
+                response = int(response)
+
+            # Checks response is not too low, not use of 'is not' keywords
+            if low is not None and response < low:
+                print(error)
+                continue
+
+            # Checks response is not too high
+            if high is not None and response > high:
+                print(error)
+                continue
+
+            return response
+
+        # checks input is a integer
+        except ValueError:
+            print(error)
+            continue
+
 # Main routine does here
 played_before = yes_no("Have you played the game before? ")
 print()
 if played_before == "no":
     instructions()
 
+game_summary = []
+
 rounds_played = 0
+rounds_right = 0
+
+rounds_wrong = 0
 
 # Ask user for # of rounds, <enter> for infinite mode
 rounds = check_rounds()
@@ -115,27 +161,67 @@ while end_game == "no":
     total = num_1 + num_2
 
     # User input
-    users_answer = "Your answer: "
+    users_answer = int(input("Your answer: "))
     print()
-
-    choose = input("{} ".format (users_answer))
-
-    # End game if exit code is typed
-    if choose == "xxx":
-        break
 
     # Check users answer
 
     if users_answer == total:
         print("Well done you got it right")
+        rounds_right += 1
     else:
         print("Sorry you got it wrong. The correct answer was {}".format(total))
+        rounds_wrong += 1
 
-    rounds_played += 1
+    choose = input("'xxx' to exit game or press enter to continue.... ")
+    print()
+
+    # End game if exit code is typed
+    if choose == "xxx":
+        break
+
+    if users_answer == total:
+        feedback = "Well done, you got it"
+    else:
+        feedback = "Sorry you got it wrong"
+
+    # end game if requested # of rounds has been played
+
+    outcome = "Question {}: {}".format(rounds_played + 1, feedback)
+
+    # Outputs results...
+    game_summary.append(outcome)
+    print(feedback)
+
+    rounds_played += 1 
 
     # end game if requested # of rounds has been played
     if rounds_played == rounds:
         break
 
-# Put end game content here
-print("Thank you for playing")
+rounds_won = rounds_played - rounds_wrong
+
+print()
+print('***** End Game Summary *****')
+print("Right: {} \t|\t Wrong: {}".format(rounds_right, rounds_wrong))
+print()
+
+# Ask user if they want to see game summary
+
+rounds = input("Please press <enter> to see your game summary.... ")
+
+# **** Calculate Game Stats ******
+
+print()
+print("**** Game History *******")
+for game in game_summary:
+    print(game)
+
+print()
+
+# display game stats with $ values to the nearest whole number
+print("******* Game Statistics ********")
+print("Wrong: {} \nRight: {}".format(rounds_right, rounds_wrong))
+
+rounds = int_check("Please press <enter> to begin.... ", 1, exit_code="")
+
