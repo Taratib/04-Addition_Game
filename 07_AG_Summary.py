@@ -3,12 +3,12 @@ game_summary = []
 rounds_wrong = 0
 rounds_played = 5
 
-for item in range(1, 6):
+for item in range(1, 5):
     result = input("choose result: ")
 
     outcome = "Question {}: {}".format(item, result)
 
-    if result == "lost":
+    if result == "wrong":
         rounds_wrong += 1
 
     game_summary.append(outcome)

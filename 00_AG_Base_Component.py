@@ -152,8 +152,8 @@ while end_game == "no":
 
     print(heading)
 
-    num_1 = random.randint(1, 50)
-    num_2 = random.randint(1, 50)
+    num_1 = random.randint(0, 50)
+    num_2 = random.randint(0, 50)
 
     print()
     print("What is {} + {} = ? ".format(num_1, num_2))
@@ -163,6 +163,11 @@ while end_game == "no":
     # User input
     users_answer = int(input("Your answer: "))
     print()
+
+    if users_answer == "xxx":
+            rounds_played -= 1
+            end_game = "yes"
+            break
 
     # Check users answer
 
@@ -222,6 +227,3 @@ print()
 # display game stats with $ values to the nearest whole number
 print("******* Game Statistics ********")
 print("Wrong: {} \nRight: {}".format(rounds_right, rounds_wrong))
-
-rounds = int_check("Please press <enter> to begin.... ", 1, exit_code="")
-
