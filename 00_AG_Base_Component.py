@@ -22,12 +22,29 @@ def yes_no(question):
 
 
 def instructions():
-    print("**** Welcome to the Addition Quiz ****")
     print()
-    print("This is where the rules go.")
+    print("**** How to Play ****")
+    print()
+    print('''Welcome to Addition Quiz this is how you play.
+    
+    - Choose how many questions you wnat or press <enter>
+    for continuous mode.
+
+    - Every question generates two random numbers for you to 
+    figure out the answer.
+
+    - If you wish to exit the quiz enter "xxx".
+
+    - When you enter your answer it will tell you
+    if you got it wrong or right.
+
+    - When you finish all your questions your game summary is 
+    shown at the end.
+
+    Enjoy !!!!!!!''')
     print()
 
-    return ""
+    return""
 
 
 def num_check(question, low, high):
@@ -79,8 +96,6 @@ def check_rounds():
 
         return response
 
-
-def int_check(question, low=None, high=None, exit_code=None):
     while True:
 
         # sets up error messages
@@ -120,6 +135,36 @@ def int_check(question, low=None, high=None, exit_code=None):
         except ValueError:
             print(error)
             continue
+
+
+def int_check(question, users_answer=None, exit_code="xxx"):
+    while True:
+
+        # sets up error message
+        if users_answer is None:
+            error = "Please enter an integer that is more than 0"
+
+        else:
+            error = "Please enter an integer"
+
+        try:
+            response = input(question)
+
+            # check to see if response is the exit code and return it
+            if response == exit_code:
+                return response
+
+            # change the response into an integer
+            else:
+                response = int(response)
+
+            return response
+
+        # checks input is a integer
+        except ValueError:
+            print(error)
+            continue
+
 
 # Main routine does here
 played_before = yes_no("Have you played the game before? ")
@@ -161,34 +206,22 @@ while end_game == "no":
     total = num_1 + num_2
 
     # User input
-    users_answer = int(input("Your answer: "))
+    users_answer = int_check("Your answer: ")
     print()
 
+  # End game if exit code is typed
     if users_answer == "xxx":
-            rounds_played -= 1
-            end_game = "yes"
-            break
-
-    # Check users answer
-
-    if users_answer == total:
-        print("Well done you got it right")
-        rounds_right += 1
-    else:
-        print("Sorry you got it wrong. The correct answer was {}".format(total))
-        rounds_wrong += 1
-
-    choose = input("'xxx' to exit game or press enter to continue.... ")
-    print()
-
-    # End game if exit code is typed
-    if choose == "xxx":
         break
 
-    if users_answer == total:
-        feedback = "Well done, you got it"
-    else:
-        feedback = "Sorry you got it wrong"
+# Check users answer
+    while users_answer != total >= 1:
+
+        if users_answer == total:
+            feedback = "Well done you got it right"
+            rounds_right += 1
+        else:
+            feedback = "Sorry you got it wrong. The correct answer was {}".format(total)
+            rounds_wrong += 1
 
     # end game if requested # of rounds has been played
 

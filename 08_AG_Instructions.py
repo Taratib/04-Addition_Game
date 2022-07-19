@@ -30,6 +30,8 @@ def instructions():
     - Every question generates two random numbers for you to 
     figure out the answer.
 
+    - If you wish to exit the quiz enter "xxx".
+
     - When you enter your answer it will tell you
     if you got it wrong or right.
 
