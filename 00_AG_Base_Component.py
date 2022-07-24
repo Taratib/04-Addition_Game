@@ -213,15 +213,14 @@ while end_game == "no":
     if users_answer == "xxx":
         break
 
-# Check users answer
-    while users_answer != total >= 1:
+# Check users answe
 
-        if users_answer == total:
-            feedback = "Well done you got it right"
-            rounds_right += 1
-        else:
-            feedback = "Sorry you got it wrong. The correct answer was {}".format(total)
-            rounds_wrong += 1
+    if users_answer == total:
+        feedback = "Well done you got it right!"
+        rounds_right += 1
+    else:
+        feedback = "Sorry incorrect! Correct answer {}".format(total)
+        rounds_wrong += 1
 
     # end game if requested # of rounds has been played
 
