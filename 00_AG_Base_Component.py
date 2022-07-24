@@ -69,7 +69,7 @@ def num_check(question, low, high):
             print(error)
 
 
-def check_rounds():
+def check_questions():
     while True:
         response = input("How many question: ")
 
@@ -82,7 +82,7 @@ def check_rounds():
                 response = int(response)
 
                 # If response is too low, go back to
-                # stsrt of loop
+                # start of loop
                 if response < 1:
                     print(round_error)
                     continue
@@ -96,12 +96,13 @@ def check_rounds():
 
         return response
 
+
 def int_check(question, users_answer=None, exit_code="xxx"):
     while True:
 
         # sets up error message
         if users_answer is None:
-            error = "Please enter an integer that is more than 0"
+            error = "Please enter an integer"
 
         else:
             error = "Please enter an integer"
@@ -133,13 +134,13 @@ if played_before == "no":
 
 game_summary = []
 
-rounds_played = 0
-rounds_right = 0
+questions_played = 0
+questions_right = 0
 
-rounds_wrong = 0
+questions_wrong = 0
 
 # Ask user for # of rounds, <enter> for infinite mode
-rounds = check_rounds()
+questions = check_questions()
 
 end_game = "no"
 while end_game == "no":
@@ -148,11 +149,11 @@ while end_game == "no":
 
     # Rounds Heading
     print()
-    if rounds == "":
-        heading = "Continuous Mode: Question {}".format(rounds_played + 1)
+    if questions == "":
+        heading = "Continuous Mode: Question {}".format(questions_played + 1)
 
     else:
-        heading = "Question {} of {}".format(rounds_played + 1, rounds)
+        heading = "Question {} of {}".format(questions_played + 1, questions)
 
     print(heading)
 
@@ -168,7 +169,7 @@ while end_game == "no":
     users_answer = int_check("Your answer: ")
     print()
 
-  # End game if exit code is typed
+    # End game if exit code is typed
     if users_answer == "xxx":
         break
 
@@ -176,30 +177,30 @@ while end_game == "no":
 
     if users_answer == total:
         feedback = "Well done you got it right!"
-        rounds_right += 1
+        questions_right += 1
     else:
         feedback = "Sorry incorrect! Correct answer {}".format(total)
-        rounds_wrong += 1
+        questions_wrong += 1
 
     # end game if requested # of rounds has been played
 
-    outcome = "Question {}: {}".format(rounds_played + 1, feedback)
+    outcome = "Question {}: {}".format(questions_played + 1, feedback)
 
     # Outputs results...
     game_summary.append(outcome)
     print(feedback)
 
-    rounds_played += 1 
+    questions_played += 1
 
     # end game if requested # of rounds has been played
-    if rounds_played == rounds:
+    if questions_played == questions:
         break
 
-rounds_won = rounds_played - rounds_wrong
+rounds_won = questions_played - questions_wrong
 
 print()
 print('***** End Game Summary *****')
-print("Right: {} \t|\t Wrong: {}".format(rounds_right, rounds_wrong))
+print("Right: {} \t|\t Wrong: {}".format(questions_right, questions_wrong))
 print()
 
 # Ask user if they want to see game summary
@@ -217,4 +218,4 @@ print()
 
 # display game stats with $ values to the nearest whole number
 print("******* Game Statistics ********")
-print("Wrong: {} \nRight: {}".format(rounds_right, rounds_wrong))
+print("Wrong: {} \nRight: {}".format(questions_right, questions_wrong))
