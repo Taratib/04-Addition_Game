@@ -173,7 +173,7 @@ while end_game == "no":
     if users_answer == "xxx":
         break
 
-# Check users answe
+# Check users answer
 
     if users_answer == total:
         feedback = "Well done you got it right!"
@@ -182,7 +182,7 @@ while end_game == "no":
         feedback = "Sorry incorrect! Correct answer {}".format(total)
         questions_wrong += 1
 
-    # end game if requested # of rounds has been played
+    # end game if requested # of questions has been played
 
     outcome = "Question {}: {}".format(questions_played + 1, feedback)
 
@@ -192,11 +192,11 @@ while end_game == "no":
 
     questions_played += 1
 
-    # end game if requested # of rounds has been played
+    # end game if requested # of questions has been played
     if questions_played == questions:
         break
 
-rounds_won = questions_played - questions_wrong
+questions_won = questions_played - questions_wrong
 
 print()
 print('***** End Game Summary *****')
